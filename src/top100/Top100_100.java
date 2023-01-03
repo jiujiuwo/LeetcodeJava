@@ -1,7 +1,12 @@
 package top100;
 
 import java.util.Arrays;
+import java.util.Stack;
 
+/**
+ * 单调栈，相关题目
+ * 496,901，42,84
+ */
 public class Top100_100 {
 
     /**
@@ -56,14 +61,24 @@ public class Top100_100 {
 
     /**
      * 以空间换时间，单调栈？
-     *
+     * 借用栈来存储 数组的下标。
+     *  如果栈为空，则直接入栈，
+     *  如果栈不为空，并且，当前元素大于栈顶元素，则找到了当前栈中元素的，后面第一个大于他们的值
+     *  如果当前元素小于栈顶元素，则需要继续压栈。
      * @param temperatures
      * @return
      */
     public int[] dailyTemperatures3(int[] temperatures) {
         int length = temperatures.length;
         int[] result = new int[length];
-        // 首先便利一遍数据，确认每个元素的下标？
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < length; i++) {
+            while (!stack.isEmpty() && temperatures[i] > temperatures[stack.peek()]) {
+                int index = stack.pop();
+                result[index] = i - index;
+            }
+            stack.push(i);
+        }
         return result;
     }
 
