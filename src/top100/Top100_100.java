@@ -6,6 +6,7 @@ public class Top100_100 {
 
     /**
      * 结果超时，通过率 47/48
+     * 
      * @param temperatures
      * @return
      */
@@ -22,6 +23,19 @@ public class Top100_100 {
                 }
             }
         }
+        return result;
+    }
+
+    /**
+     * 以空间换时间，单调栈？
+     * 
+     * @param temperatures
+     * @return
+     */
+    public int[] dailyTemperatures3(int[] temperatures) {
+        int length = temperatures.length;
+        int[] result = new int[length];
+        // 首先便利一遍数据，确认每个元素的下标？
         return result;
     }
 
@@ -46,7 +60,7 @@ public class Top100_100 {
     }
 
     public static void main(String[] args) {
-        int[] input = {73, 74, 75, 71, 69, 72, 76, 73};
+        int[] input = { 73, 74, 75, 71, 69, 72, 76, 73 };
         int[] result = new Top100_100().dailyTemperatures2(input);
         Arrays.stream(result).forEach(item -> {
             System.out.print(item + " ");
