@@ -4,6 +4,12 @@ import java.util.*;
 
 public class Top100_621 {
 
+    /**
+     * 通过率 61/71,有一定的道理但是找的规律还是有些问题，继续探索。
+     * @param tasks
+     * @param n
+     * @return
+     */
     public static int leastInterval(char[] tasks, int n) {
 
         // 处理边界问题
@@ -21,27 +27,10 @@ public class Top100_621 {
                 map.put(tasks[i], 1);
             }
         }
-        List<Character> result = new LinkedList<>();
-        Set<Character> keyset = map.keySet();
-        while (!map.isEmpty()) {
-            keyset.forEach(item -> {
-                // 如果map中还有这个元素，将其取出，放置在结果集
-                if (map.containsKey(item)) {
-                    int count = map.get(item);
-                    if (count == 0) {
-                        map.remove(item);
-                    } else {
-                        result.add(item);
-                    }
-                }else{// 如果结果集中没有该字母了，名
-
-                }
-            });
-        }
-
-        int max = map.values().stream().max(Integer::compare).get();
-        int tmp = (n + 1) * (max - 1);
-        return 0;
+        long max = map.values().stream().max(Integer::compare).get();
+        long maxCount = map.values().stream().filter(item -> item == max).count();
+        long tmp = (n + 1) * (max - 1) + maxCount;
+        return (int) tmp;
     }
 
 
