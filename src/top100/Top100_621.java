@@ -35,6 +35,7 @@ public class Top100_621 {
     }
 
     /**
+     * 通过率 100%
      * @param tasks
      * @param n
      * @return
