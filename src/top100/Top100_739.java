@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
+ * 每日温度
  * 单调栈，相关题目
  * 问题本质，找出当前元素后，第一个比当前元素大的元素的下标
  * 496,901，42,84
  */
-public class Top100_100 {
+public class Top100_739 {
 
     /**
      * 结果超时，通过率 47/48
@@ -109,7 +110,7 @@ public class Top100_100 {
 
     public static void main(String[] args) {
         int[] input = {73, 74, 75, 71, 69, 72, 76, 73};
-        int[] result = new Top100_100().dailyTemperatures2(input);
+        int[] result = new Top100_739().dailyTemperatures2(input);
         Arrays.stream(result).forEach(item -> {
             System.out.print(item + " ");
         });
