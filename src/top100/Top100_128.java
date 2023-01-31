@@ -17,23 +17,36 @@ public class Top100_128 {
 
     /**
      * 没有考虑 负数的情况，后续补充
+     * 经过修改后， 通过率67/72，超出了内存限制。。。
      * @param nums
      * @return
      */
     public int longestConsecutive1(int[] nums) {
         int max = 0;
+        int min = 0;
+
+        // 找出最大最小值
         for (int i = 0; i < nums.length; i++) {
+            if (nums[i] <= min) {
+                min = nums[i];
+            }
+        }
+        // 按照最大最小值重新变换数组，都是正数
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] - min;
             if (nums[i] >= max) {
                 max = nums[i];
             }
         }
-        int[] dp = new int[Math.max(max, nums.length) + 1];
+
+        int[] dp = new int[Math.max(max, nums.length) + 2];
         Arrays.fill(dp, 0);
         for (int i = 0; i < nums.length; i++) {
             dp[nums[i]] = 1;
         }
         int result = 0;
         int tmp = 0;
+
         for (int i = 0; i < dp.length; i++) {
             if (dp[i] == 1) {
                 tmp++;
@@ -42,11 +55,12 @@ public class Top100_128 {
                 tmp = 0;
             }
         }
+
         return result;
     }
 
     public static void main(String[] args) {
-        int[] in = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+        int[] in = {1,2,3,4,5};
         System.out.println(new Top100_128().longestConsecutive1(in));
     }
 }
