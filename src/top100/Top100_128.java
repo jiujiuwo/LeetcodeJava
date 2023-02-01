@@ -1,6 +1,8 @@
 package top100;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 128. 最长连续序列
@@ -18,6 +20,7 @@ public class Top100_128 {
     /**
      * 没有考虑 负数的情况，后续补充
      * 经过修改后， 通过率67/72，超出了内存限制。。。
+     *
      * @param nums
      * @return
      */
@@ -59,8 +62,42 @@ public class Top100_128 {
         return result;
     }
 
+    /**
+     * 官方正解，
+     *
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive2(int[] nums) {
+        Set<Integer> num_set = new HashSet<>();
+        // 将数组放入set中
+        for (int num : nums) {
+            num_set.add(num);
+        }
+
+        int longestStreak = 0;
+
+        // 遍历set
+        for (int num : num_set) {
+            // 如果 num-1在set中存在，则表示，以num为起点得序列一定不是最长得，所以跳过，只计算num-1不在set中得元素
+            if (!num_set.contains(num - 1)) {
+                int currentNum = num;
+                int currentStreak = 1;
+
+                while (num_set.contains(currentNum + 1)) {
+                    currentNum += 1;
+                    currentStreak += 1;
+                }
+
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+
+        return longestStreak;
+    }
+
     public static void main(String[] args) {
-        int[] in = {1,2,3,4,5};
+        int[] in = {1, 2, 3, 4, 5};
         System.out.println(new Top100_128().longestConsecutive1(in));
     }
 }
